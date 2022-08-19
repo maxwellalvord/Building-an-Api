@@ -12,7 +12,7 @@ namespace NatPark.Models
         {
           builder.Entity<Park>()
               .HasData(
-                // seed data here
+                  new Park { ParkId = 1, Name = "Crater Lake", Popularity = 5}
               );
         }
         public DbSet<Park> Parks { get; set; }

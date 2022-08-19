@@ -160,5 +160,29 @@ namespace NatPark.Controllers
       return NoContent();
     }
 
+
+    /// <summary>
+    /// Grabs a specific Park by id.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>A specific Park</returns>
+    // GET: api/Parks/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Park>> GetPark(int id)
+    {
+        var park = await _db.Parks.FindAsync(id);
+
+        if (park == null)
+        {
+            return NotFound();
+        }
+
+        return park;
+    }
+     private bool ParkExists(int id)
+    {
+      return _db.Parks.Any(e => e.ParkId == id);
+    }
+
   }
 }
