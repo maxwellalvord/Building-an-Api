@@ -33,16 +33,16 @@ namespace NatPark
                     Version = "v1",
                     Title = "National Parks API",
                     Description = "An ASP.NET Core Web API for managing National Parks",
-                    TermsOfService = new Uri("https://example.com/terms"),
+                    TermsOfService = new Uri("https://github.com/maxwellalvord/Building-an-Api/main/README.md"),
                     Contact = new OpenApiContact
                     {
-                        Name = "Example Contact",
-                        Url = new Uri("https://example.com/contact")
+                        Name = "Creator Contact",
+                        Url = new Uri("https://github.com/maxwellalvord/maxwellalvord/issues")
                     },
                     License = new OpenApiLicense
                     {
-                        Name = "Example License",
-                        Url = new Uri("https://example.com/license")
+                        Name = "MIT License",
+                        Url = new Uri("https://opensource.org/osd")
                     }
                 });
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

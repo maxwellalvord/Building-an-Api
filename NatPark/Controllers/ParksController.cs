@@ -28,7 +28,7 @@ namespace NatPark.Controllers
     /// <summary>
     /// Grabs a list of Parks.
     /// </summary>
-    /// <param name="Location"></param>
+    /// <param name="location"></param>
     /// <param name="name"></param>
     /// <param name="popularity"></param>
     // GET api/Parks
