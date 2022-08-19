@@ -12,7 +12,10 @@ namespace NatPark.Models
         {
           builder.Entity<Park>()
               .HasData(
-                  new Park { ParkId = 1, Name = "Crater Lake", Popularity = 5}
+                  new Park {ParkId = 1, Name = "Crater Lake National Park", Location = "Kalamath Falls, OR", Popularity = 5},
+                  new Park {ParkId = 2, Name = "Glacier National Park", Location = "Glacier County, MT", Popularity = 7},
+                  new Park {ParkId = 3, Name = "Gateway Arch National Park", Location = "St. Louis, MO", Popularity = 4}
+
               );
         }
         public DbSet<Park> Parks { get; set; }
