@@ -28,18 +28,18 @@ namespace NatPark.Controllers
     /// <summary>
     /// Grabs a list of Parks.
     /// </summary>
-    /// <param name="state"></param>
+    /// <param name="Location"></param>
     /// <param name="name"></param>
     /// <param name="popularity"></param>
     // GET api/Parks
     [HttpGet]
-    public async Task<List<Park>> Get(string state, string name, int popularity)
+    public async Task<List<Park>> Get(string location, string name, int popularity)
     {
       IQueryable<Park> query = _db.Parks.AsQueryable();
 
-      if (state != null)
+      if (location != null)
       {
-        query = query.Where(entry => entry.State == state);
+        query = query.Where(entry => entry.Location == location);
       }
 
       if (name != null)
@@ -67,7 +67,7 @@ namespace NatPark.Controllers
     ///     {
     ///        "ParkId": 1,
     ///        "Name": "Garage #1",
-    ///        "State": "Portland",
+    ///        "Location": "Portland",
     ///        "Popularity": 5,
     ///     }
     ///
@@ -90,7 +90,6 @@ namespace NatPark.Controllers
     /// Deletes a specific park.
     /// </summary>
     /// <param name ="id"></param>
-    /// <returns></returns>
     // DELETE: api/Parks/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeletePark(int id)
@@ -103,6 +102,60 @@ namespace NatPark.Controllers
 
       _db.Parks.Remove(park);
       await _db.SaveChangesAsync();
+
+      return NoContent();
+    }
+
+
+    /// <summary>
+    /// modifies a specific park.
+    /// </summary>
+    /// <param name="park"></param>
+    /// <param name="id"></param>
+    /// <returns>A newly updated Park</returns>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     PUT api/Parks/5
+    ///     {
+    ///        "ParkId": 1,
+    ///        "Name": "Crater Lake",
+    ///        "Location": "Portland",
+    ///        "Popularity": 7,
+    ///     }
+    ///
+    /// </remarks>
+    /// <response code="201">Returns the newly updated park</response>
+    /// <response code="400">If the park is null</response>
+    // PUT: api/Parks/5
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    // [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Put(int id, Park park)
+    {
+      if (id != park.ParkId)
+      {
+        return BadRequest();
+      }
+
+      _db.Entry(park).State = EntityState.Modified;
+
+      try
+      {
+        await _db.SaveChangesAsync();
+      }
+      catch (DbUpdateConcurrencyException)
+      {
+        if (!ParkExists(id))
+        {
+          return NotFound();
+        }
+        else
+        {
+          throw;
+        }
+      }
 
       return NoContent();
     }

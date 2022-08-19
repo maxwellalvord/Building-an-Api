@@ -10,7 +10,7 @@ namespace NatPark.Models
         public string Name { get; set; }
 
         [Required]
-        public string State { get; set; }
+        public string Location { get; set; }
 
         [Required]
         [Range(0, 10, ErrorMessage = "Rate must be between 0 and 10.")]
