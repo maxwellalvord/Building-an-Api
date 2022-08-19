@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NatPark.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace NatPark.Controllers
 {
@@ -28,10 +31,7 @@ namespace NatPark.Controllers
     /// <summary>
     /// Grabs a list of Parks.
     /// </summary>
-    /// <param name="location"></param>
-    /// <param name="name"></param>
-    /// <param name="popularity"></param>
-    // GET api/Parks
+    // GET api/parks
     [HttpGet]
     public async Task<List<Park>> Get(string location, string name, int popularity)
     {
@@ -58,7 +58,9 @@ namespace NatPark.Controllers
     /// <summary>
     /// Creates a Park.
     /// </summary>
-    /// <param name="park"></param>
+    /// <param name="location"></param>
+    /// <param name="name"></param>
+    /// <param name="popularity"></param>
     /// <returns>A newly created Park</returns>
     /// <remarks>
     /// Sample request:
@@ -90,7 +92,7 @@ namespace NatPark.Controllers
     /// Deletes a specific park.
     /// </summary>
     /// <param name ="id"></param>
-    // DELETE: api/Parks/5
+    // DELETE: api/parks/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeletePark(int id)
     {
@@ -126,7 +128,7 @@ namespace NatPark.Controllers
     /// </remarks>
     /// <response code="201">Returns the newly updated park</response>
     /// <response code="400">If the park is null</response>
-    // PUT: api/Parks/5
+    // PUT: api/parks/5
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     // [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -164,7 +166,7 @@ namespace NatPark.Controllers
     /// </summary>
     /// <param name="id"></param>
     /// <returns>A specific Park</returns>
-    // GET: api/Parks/5
+    // GET: api/parks/5
     [HttpGet("{id}")]
     public async Task<ActionResult<Park>> GetPark(int id)
     {
@@ -177,6 +179,31 @@ namespace NatPark.Controllers
 
         return park;
     }
+
+    /// <summary>
+    /// Grabs a random Park.
+    /// </summary>
+    /// <returns>A random Park</returns>
+    // GET: api/parks/random
+    [HttpGet("random")]
+    public async Task<ActionResult<Park>> RanPark()
+    {
+        using(HttpClient client = new HttpClient())
+        {
+            var result = await client.GetAsync("http://localhost:5004/api/parks");
+            if(result.IsSuccessStatusCode)
+            {
+              var parkListString = await result.Content.ReadAsStringAsync();
+              var parkList = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Park>>(parkListString);;
+              return parkList.ElementAt(new Random().Next(0, parkList.Count() -1));
+            }
+            else
+            {
+                return NotFound();
+            }
+        }        
+    }
+
      private bool ParkExists(int id)
     {
       return _db.Parks.Any(e => e.ParkId == id);
