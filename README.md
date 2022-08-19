@@ -1,4 +1,4 @@
-# Building an Api
+# Building an API
 
 #### By _**Maxwell Alvord**_   
 
@@ -12,16 +12,15 @@
 * _SQL Workbench_
 * _Entity Framework_
 * _Swagger_
-
 ---
 ## Description
 
-This is an API that's populated with seed data from real National Parks around the country. Swagger UI is integrated into this project for easy api use.
+This is an API that's populated with seed data from real National Parks around the country(_Popularity has no logic_). Swagger UI is integrated into this project for easy api use.
 _Written in C#_
 
 ---
 ## Setup and Installation Requirements
-**This Setup assumes you have GitBash and MySQL Workbench pre-installed.   
+**This Setup assumes you have GitBash and MySQL Workbench pre-installed.
 If needed, please navigate to these links:  
 https://git-scm.com/download/  
 Download Git and follow the setup wizard.  
@@ -49,14 +48,23 @@ Download MySQL Workbench, follow the setup wizard & create a localhost server on
 <ol>
 <li>Create an appsettings.Development.json file in the "NatPark" directory  
    <pre>NatPark
-   └── appsettings.Development.json</pre>
+   └── appsettings.json</pre>
 
 <li> Insert the following code: <br>
 
 <pre>{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;database=nat_park;uid=[YOUR-USERNAME-HERE];pwd=[YOUR-PASSWORD-HERE];"
+    "DefaultConnection": "Server=localhost;Port=3306;database=nat_park;uid=root;pwd=epicodus;"
   }
+}
 }</pre>
 <small>*Note: you must include your password in the code block section labeled "YOUR-PASSWORD-HERE".</small><br>
 <small>**Note: you must include your username in the code block section labeled "YOUR-USERNAME-HERE".</small><br>
@@ -85,7 +93,6 @@ Run ```$ dotnet run``` in the terminal.
 <br>
 
 ---
-
 ## API Documentation
 _This API is using Swagger (an open-source API tool) to describe its structure and display all available endpoints_
 
@@ -119,6 +126,7 @@ POST api/Parks
 DELETE api/Parks/{id}
 PUT api/Parks/{id}
 GET api/Parks/{id}
+GET api/Parks/random
 ```
 
 #### Example Query

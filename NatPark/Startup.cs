@@ -37,7 +37,7 @@ namespace NatPark
                     Contact = new OpenApiContact
                     {
                         Name = "Creator Contact",
-                        Url = new Uri("https://github.com/maxwellalvord/maxwellalvord/issues")
+                        Url = new Uri("https://www.linkedin.com/in/maxwellalvord/")
                     },
                     License = new OpenApiLicense
                     {
