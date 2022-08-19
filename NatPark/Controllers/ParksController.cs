@@ -106,7 +106,6 @@ namespace NatPark.Controllers
       return NoContent();
     }
 
-
     /// <summary>
     /// modifies a specific park.
     /// </summary>
@@ -160,7 +159,6 @@ namespace NatPark.Controllers
       return NoContent();
     }
 
-
     /// <summary>
     /// Grabs a specific Park by id.
     /// </summary>
@@ -183,6 +181,5 @@ namespace NatPark.Controllers
     {
       return _db.Parks.Any(e => e.ParkId == id);
     }
-
   }
 }

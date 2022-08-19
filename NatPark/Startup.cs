@@ -4,11 +4,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models; //add for swagger documentation
-using System;   //Add for swagger documentation
-using System.Reflection; //add for swagger documentation
+using Microsoft.OpenApi.Models; 
+using System; 
+using System.Reflection; 
 using NatPark.Models;
-using System.IO; //
+using System.IO; 
 
 namespace NatPark
 {
@@ -62,8 +62,6 @@ namespace NatPark
                 });
                 app.UseDeveloperExceptionPage();
             }
-
-            // app.UseHttpsRedirection();
 
             app.UseRouting();
 
