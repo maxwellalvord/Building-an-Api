@@ -4,7 +4,7 @@ namespace NatPark.Models
 {
     public class NatParkContext : DbContext
     {
-        public SkateRateContext(DbContextOptions<NatParkContext> options)
+        public NatParkContext(DbContextOptions<NatParkContext> options)
             : base(options)
         {
         }
