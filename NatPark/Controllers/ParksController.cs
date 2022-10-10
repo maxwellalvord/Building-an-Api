@@ -16,7 +16,7 @@ using Newtonsoft.Json.Linq;
 namespace NatPark.Controllers
 {
 
-  [Route("api/[controller]")] // api/parks?
+  [Route("api/[controller]")]
   [Produces("application/json")]
   [ApiController]
   public class ParksController : ControllerBase
