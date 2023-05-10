@@ -18,6 +18,12 @@
 This is an API that's populated with seed data from real National Parks around the country(_Popularity has no logic_). Swagger UI is integrated into this project for easy api use.
 _Written in C#_
 
+<img
+  src="./Build-API.png"
+  alt="Building an API"
+  title="Building an API"
+  style=" margin: 0 auto; max-width: 800px"
+  />
 ---
 ## Setup and Installation Requirements
 **This Setup assumes you have GitBash and MySQL Workbench pre-installed.
